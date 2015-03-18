@@ -8,6 +8,7 @@ import (
 	"github.com/sendgrid/sendgrid-go"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Item struct {
@@ -48,7 +49,6 @@ func Get(reddit string) ([]Item, error) {
 		items[i] = child.Data
 	}
 	return items, nil
-
 }
 
 func (i Item) String() string {
@@ -67,14 +67,13 @@ func (i Item) String() string {
 }
 
 func Email() string {
-
 	var buffer bytes.Buffer
 
 	items, err := Get("golang")
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Need to build strings from items
+
 	for _, item := range items {
 		buffer.WriteString(item.String())
 	}
@@ -84,21 +83,20 @@ func Email() string {
 
 func main() {
 
-	sg := sendgrid.NewSendGridClient("sendgrid_user", "sendgrid_key")
-	message := sendgrid.NewMail()
+	sg := sendgrid.NewSendGridClient(os.Getenv("SENDGRID_USERNAME"), os.Getenv("SENDGRID_PASSWORD"))
+	mail := sendgrid.NewMail()
 
-	message.AddTo("myemail@me.com")
-	message.AddToName("Robin Johnson")
-	message.AddSubject("Your Daily Golang Breakfast News!")
-	message.AddFrom("rbin@sendgrid.com")
+	mail.AddTo("rbin@sendgrid.com")
+	mail.AddToName("Robin Johnson")
+	mail.SetSubject("Your Daily Golang News")
+	mail.SetFrom("taco@cat.limo")
 
-	message.AddHTML(Email())
+	mail.SetHTML(Email())
 
-	if rep := sg.Send(message); rep == nil {
-		fmt.Println("Email sent!")
+	if rep := sg.Send(mail); rep == nil {
+		fmt.Println("email Sent!")
 		fmt.Println("Closing...")
 	} else {
 		fmt.Println(rep)
 	}
-
 }

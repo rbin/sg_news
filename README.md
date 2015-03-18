@@ -1,22 +1,4 @@
-### Pre-Requisites
-
-For this hack, we're going to use Reddit's API, SendGrid's API, and our Golang library for said API.  You can find the relevant libraries you require below:
-
-* <a href="https://github.com/sendgrid/sendgrid-go">Go SendGrid Lib</a>
-
-Other than those, we will be sticking to the excellent native libs from Go.
-
-
-### Let's get started!
-
-If you haven't already, head over to <a href="http://hack.sendgrid.com">hack.sendgrid.com</a>, register an account and hit me up on Twitter, @rbin, or by email Robin@SendGrid.com to get your account provisioned to send emails!
-
-Once you've done that, use <i>Go Get</i> to install the dependencies above.  I.E.
-
-	go get github.com/sendgrid/sendgrid-go
-	
-
-Now, go ahead and create a workspace / project for your hack.  Personally, I setup the namespace of <i>sg_news</i>, but you can use anything you like.  (Just make sure you alter the code I provide accordingly!)  So, we've installed our Dependencies, created a Project namespace and directory, so let's dive in a write some code!
+Go ahead and create a workspace / project for your hack.  Personally, I setup the namespace of <i>sg_news</i>, but you can use anything you like.  (Just make sure you alter the code I provide accordingly!)  So, we've installed our Dependencies, created a Project namespace and directory, so let's dive in a write some code!
 
 Inside your News Reader namespace, create a file called ***main.go***  Open it up in your choice of IDE and input the following:
 
